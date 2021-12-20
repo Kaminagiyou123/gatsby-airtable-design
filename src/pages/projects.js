@@ -11,6 +11,7 @@ const ProjectsPage = ({ data }) => {
     <Wrapper>
       <Layout>
         <Projects titel="our projects" projects={projects} page />
+        <Algolia/>
       </Layout>
     </Wrapper>
   )
@@ -28,7 +29,7 @@ export const query = graphql`
   {
     allAirtable(
       filter: { table: { eq: "Projects" } }
-      sort: { fields: data___date, order: DESC }
+      sort: { order: DESC, fields: data___date }
     ) {
       nodes {
         data {
@@ -38,7 +39,7 @@ export const query = graphql`
           image {
             localFiles {
               childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED, placeholder: TRACED_SVG)
+                gatsbyImageData
               }
             }
           }
@@ -48,4 +49,5 @@ export const query = graphql`
     }
   }
 `
+
 export default ProjectsPage
